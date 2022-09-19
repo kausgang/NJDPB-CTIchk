@@ -1,0 +1,1 @@
+C:\INSTALLED\jdk-18.0.2.1\bin\java -classpath OUTPUT\HC.jar Main

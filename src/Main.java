@@ -20,9 +20,9 @@ public class Main {
 		try
     	{
 			////TEST
-    		driver.get("https://snja65.pa.state.nj.us/epublicsector_enu");
+//    		driver.get("https://snja65.pa.state.nj.us/epublicsector_enu");
 //			Prod
-//    		driver.get("http://ty-siebl01-h1-e.pa.state.nj.us/epublicsector_enu");
+    		driver.get("http://ty-siebl01-h1-e.pa.state.nj.us/epublicsector_enu");
     	}
     	catch (Exception e) {
 			// TODO: handle exception
@@ -36,9 +36,9 @@ public class Main {
 			
 			driver.findElement(By.id("s_swepi_1")).sendKeys("sadmin");
 			//// DEV & TEST 
-			driver.findElement(By.id("s_swepi_2")).sendKeys("siebdev99");
+//			driver.findElement(By.id("s_swepi_2")).sendKeys("siebdev99");
 			////PROD
-//			driver.findElement(By.id("s_swepi_2")).sendKeys("siebprod99");
+			driver.findElement(By.id("s_swepi_2")).sendKeys("siebprod99");
 			
 			driver.findElement(By.id("s_swepi_22")).click();
 			
@@ -127,7 +127,7 @@ public class Main {
     public static void killProcess(String serviceName) throws Exception {
 
    	 
-  	  Runtime.getRuntime().exec("taskkill /F /IM " + serviceName);
+
   	  
   	String[] arguments=null;
 
