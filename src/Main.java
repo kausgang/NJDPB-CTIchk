@@ -20,9 +20,9 @@ public class Main {
 		try
     	{
 			////TEST
-//    		driver.get("https://snja65.pa.state.nj.us/epublicsector_enu");
+    		driver.get("https://snja65.pa.state.nj.us/epublicsector_enu");
 //			Prod
-    		driver.get("http://ty-siebl01-h1-e.pa.state.nj.us/epublicsector_enu");
+//    		driver.get("http://ty-siebl01-h1-e.pa.state.nj.us/epublicsector_enu");
     	}
     	catch (Exception e) {
 			// TODO: handle exception
@@ -31,14 +31,16 @@ public class Main {
 
 		}
 		
+		wait(5);
+		
 		//login using sadmin
 		try {
 			
 			driver.findElement(By.id("s_swepi_1")).sendKeys("sadmin");
 			//// DEV & TEST 
-//			driver.findElement(By.id("s_swepi_2")).sendKeys("siebdev99");
+			driver.findElement(By.id("s_swepi_2")).sendKeys("siebdev99");
 			////PROD
-			driver.findElement(By.id("s_swepi_2")).sendKeys("siebprod99");
+//			driver.findElement(By.id("s_swepi_2")).sendKeys("siebprod99");
 			
 			driver.findElement(By.id("s_swepi_22")).click();
 			
@@ -56,17 +58,77 @@ public class Main {
 		//communication toolbar click
 		driver.findElement(By.id("tb_1")).click();
 		
+		wait(5);
+		
+		
+		
+		
+		
+		
+		
+//		2nd instance
+		
+//		open prod url
+		WebDriver driver2 = new ChromeDriver();
+		try
+    	{
+			////TEST
+    		driver2.get("https://snja65.pa.state.nj.us/epublicsector_enu");
+//			Prod
+//    		driver2.get("http://ty-siebl01-h1-e.pa.state.nj.us/epublicsector_enu");
+    	}
+    	catch (Exception e) {
+			// TODO: handle exception
+    		System.out.println("couldn't open");
+    		send_mail("ERROR");
+
+		}
+		
+		wait(5);
+		
+		//login using sadmin
+		try {
+			
+			driver2.findElement(By.id("s_swepi_1")).sendKeys("typdike");
+			//// DEV & TEST 
+			driver2.findElement(By.id("s_swepi_2")).sendKeys("typdike");
+			////PROD
+//			driver2.findElement(By.id("s_swepi_2")).sendKeys("siebprod99");
+			
+			driver2.findElement(By.id("s_swepi_22")).click();
+			
+		} catch (Exception e) {
+			
+			
+			System.out.println("system down");
+			send_mail("ERROR");
+//    		driver.close();
+		}
+		
+		System.out.println("Waiting 10 seconds");
+		Thread.sleep(10000);  // Let the user actually see something!  
+		
+		
+		
+//		find status from 2nd driver
+		
+		//communication toolbar click
+		driver2.findElement(By.id("tb_1")).click();
+		
+		wait(5);
+		
 		//get toolbar msg
 		String comm_status=driver.findElement(By.id("MessageSpan")).getText();
 		System.out.println(comm_status);
 //		
-		if(comm_status == "Communication: User has maximum Communication toolbar sessions.")
+		if(comm_status.equalsIgnoreCase("Communication: User has maximum Communication toolbar sessions.") )
 			send_mail("Running");
 		else
 			send_mail("ERROR");
 		
 		System.out.println("Program end");
 		driver.close();
+		driver2.close();
 		try {
 			killProcess("chromedriver.exe");
 		} catch (Exception e) {
@@ -102,7 +164,7 @@ public class Main {
 	public static void send_mail(String comm_status)
     {
    	
-		
+		System.out.println(comm_status);
 
 		Runtime runtime = Runtime.getRuntime();
 		
